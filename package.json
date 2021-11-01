@@ -31,6 +31,7 @@
   "dependencies": {
     "@nestjs/common": "^8.1.2",
     "@nestjs/core": "^8.0.0",
+    "@nestjs/mapped-types": "*",
     "@nestjs/mongoose": "^9.0.1",
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^8.0.0",
@@ -40,15 +41,16 @@
     "@types/passport-jwt": "^3.0.6",
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
+    "firebase-admin": "^9.8.0",
+    "firebase-functions": "^3.14.1",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
     "mongoose": "^6.0.12",
     "passport": "^0.5.0",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.4.0",
-    "firebase-admin": "^9.8.0",
-    "firebase-functions": "^3.14.1"
+    "rxjs": "^7.4.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",

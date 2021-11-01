@@ -4,11 +4,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { EventsModule } from './events/events.module';
 
 require('dotenv').config()
 
 @Module({
-  imports: [MongooseModule.forRoot("mongodb+srv://dun:1234Qwer@cluster0.qpl25.mongodb.net/charitap?retryWrites=true&w=majority"), UsersModule, AuthModule],
+  imports: [MongooseModule.forRoot("mongodb+srv://dun:1234Qwer@cluster0.qpl25.mongodb.net/charitap?retryWrites=true&w=majority"), UsersModule, AuthModule, EventsModule],
   controllers: [AppController],
   providers: [AppService],
 })

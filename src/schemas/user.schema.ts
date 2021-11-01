@@ -39,7 +39,7 @@ export class User {
     avatar?: string
     
     @Prop()
-    participate?: Object[]
+    participated?: Object[]
 
     @Prop()
     hosting?: Object[]
