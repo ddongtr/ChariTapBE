@@ -5,12 +5,21 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { EventsModule } from './events/events.module';
-
-require('dotenv').config()
-
+import dotenv = require('dotenv');
 @Module({
-  imports: [MongooseModule.forRoot("mongodb+srv://dun:1234Qwer@cluster0.qpl25.mongodb.net/charitap?retryWrites=true&w=majority"), UsersModule, AuthModule, EventsModule],
+  imports: [
+    MongooseModule.forRoot(
+      'mongodb+srv://dun:1234Qwer@cluster0.qpl25.mongodb.net/charitap?retryWrites=true&w=majority',
+    ),
+    UsersModule,
+    AuthModule,
+    EventsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    dotenv.config();
+  }
+}

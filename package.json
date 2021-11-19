@@ -25,7 +25,7 @@
     "serve": "sudo npm run build && sudo firebase serve",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
+    "deploy": "sudo firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
   "dependencies": {

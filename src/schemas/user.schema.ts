@@ -1,62 +1,60 @@
-
 import { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 
-export type UserDocument = User & Document
+export type UserDocument = User & Document;
 
 export interface Payload {
-    username: string
+  username: string;
 }
 
 @Schema()
 export class User {
-    @Prop({ required: true, unique: true })
-    username: string
+  @Prop({ required: true, unique: true })
+  username: string;
 
-    @Prop({ required: true })
-    password: string
+  @Prop({ required: true })
+  password: string;
 
-    @Prop()
-    name?: string
+  @Prop()
+  name?: string;
 
-    @Prop()
-    age?: number
+  @Prop()
+  age?: number;
 
-    @Prop()
-    phone_number?: string
+  @Prop()
+  phone_number?: string;
 
-    @Prop()
-    gender?: boolean
+  @Prop()
+  gender?: boolean;
 
-    @Prop()
-    birthday?: Date
+  @Prop()
+  birthday?: Date;
 
-    @Prop()
-    role: string
+  @Prop()
+  role: string;
 
-    @Prop()
-    avatar?: string
-    
-    @Prop()
-    participated?: Object[]
+  @Prop()
+  avatar?: string;
 
-    @Prop()
-    hosting?: Object[]
+  @Prop()
+  participated?: [];
+
+  @Prop()
+  hosting?: [];
 }
 
+export const UserSchema = SchemaFactory.createForClass(User);
 
-export const UserSchema = SchemaFactory.createForClass(User)
-
-UserSchema.pre('save', async function(next) {
-    try {
-      if (!this.isModified('password')) {
-        return next();
-      }
-      const hashed = await bcrypt.hash(this['password'], 16);
-      this['password'] = hashed;
+UserSchema.pre('save', async function (next) {
+  try {
+    if (!this.isModified('password')) {
       return next();
-    } catch (err) {
-      return next(err);
     }
-  });
+    const hashed = await bcrypt.hash(this['password'], 16);
+    this['password'] = hashed;
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+});
