@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { EventsModule } from './events/events.module';
+import { RequestModule } from './request/request.module';
 import dotenv = require('dotenv');
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import dotenv = require('dotenv');
     UsersModule,
     AuthModule,
     EventsModule,
+    RequestModule,
   ],
   controllers: [AppController],
   providers: [AppService],

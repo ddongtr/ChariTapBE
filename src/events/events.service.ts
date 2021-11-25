@@ -46,7 +46,7 @@ export class EventsService {
   async findOne(id: string): Promise<Event> {
     const document = await this.model.findById(id).exec();
     return document
-      ? this.refreshing(document)
+      ? await this.refreshing(document)
       : {
           msg: 'none',
         };
@@ -70,7 +70,7 @@ export class EventsService {
   //-------------------------------------------
   //set status follow date
   async handleStatus(createEventDto: CreateEventDto) {
-    const now = moment().format('L'); //get date of moment
+    const now = moment().format('DD/MM/YYYY'); //get date of moment
     const START = createEventDto.start; //start date of event
     const END = createEventDto.end; //end date of event
     const REGIST_FROM = createEventDto.regist_from; //get start registing date of event
