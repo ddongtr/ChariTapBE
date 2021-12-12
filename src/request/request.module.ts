@@ -9,7 +9,10 @@ import { UsersModule } from 'src/users/users.module';
 @Module({
   controllers: [RequestController],
   providers: [RequestService],
-  imports: [EventsModule, UsersModule,
-    MongooseModule.forFeature([{ name: 'Request', schema: RequestSchema }]),]
+  imports: [
+    EventsModule,
+    UsersModule,
+    MongooseModule.forFeature([{ name: 'Request', schema: RequestSchema }]),
+  ],
 })
 export class RequestModule {}

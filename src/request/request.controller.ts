@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { RequestService } from './request.service';
 import { CreateRequestDto } from './dto/create-request.dto';
 import { UpdateRequestDto } from './dto/update-request.dto';
@@ -6,7 +15,7 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller('request')
 export class RequestController {
-  constructor(private readonly requestService: RequestService) { }
+  constructor(private readonly requestService: RequestService) {}
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
@@ -15,7 +24,7 @@ export class RequestController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-    @Get('id/:id')
+  @Get('id/:id')
   findOne(@Param('id') id: string) {
     return this.requestService.findOne(id);
   }
@@ -26,13 +35,13 @@ export class RequestController {
     return this.requestService.create(createRequestDto);
   }
 
-  @UseGuards(AuthGuard("jwt"))
-  @Post("approve")
+  @UseGuards(AuthGuard('jwt'))
+  @Post('approve')
   approve(@Body() param: any) {
-    return this.requestService.approving(param.admin, param.id,param.param)
+    return this.requestService.approving(param.admin, param.id, param.param);
   }
-  
-   @UseGuards(AuthGuard('jwt'))
+
+  @UseGuards(AuthGuard('jwt'))
   @Get(':host')
   findHost(@Param('host') host: string) {
     return this.requestService.findByHost(host);

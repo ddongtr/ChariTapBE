@@ -10,4 +10,6 @@ export class CreateEventDto {
   host: string;
   image?: string;
   joiners?: [];
+    status?: string;
+  statusCode?: number;
 }

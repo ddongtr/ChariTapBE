@@ -12,17 +12,17 @@ export class RequestService {
   constructor(
     @InjectModel('Request') private readonly model: Model<RequestDocument>,
     private readonly userService: UsersService,
-    private readonly eventService: EventsService
-  ) { }
+    private readonly eventService: EventsService,
+  ) {}
 
-    async findAll() {
-    return await this.model.find().sort({start: -1}).exec();
-    }
-  
-    async findOne(id: string) {
+  async findAll() {
+    return await this.model.find().sort({ start: -1 }).exec();
+  }
+
+  async findOne(id: string) {
     return await this.model.findById(id).exec();
   }
-  
+
   async create(createRequestDto: CreateRequestDto) {
     const submitted = await this.Submitted(createRequestDto);
     if (submitted < 3) {
@@ -30,6 +30,7 @@ export class RequestService {
         ...createRequestDto,
         rating: [],
         status: 'wait',
+        statusCode: -1,
       }).save();
     } else {
       return {
@@ -38,26 +39,32 @@ export class RequestService {
     }
   }
 
-  async approving(admin: string, id: string, createRequestDto: CreateRequestDto) {
-    if (admin == "619b3dc446350aed934841d5") {
+  async approving(
+    admin: string,
+    id: string,
+    createRequestDto: CreateRequestDto,
+  ) {
+    if (admin == '619b3dc446350aed934841d5') {
       if (createRequestDto.status == 'approve') {
-        await this.model.findByIdAndDelete(id)
-        return await this.eventService.create(createRequestDto)
+        await this.model.findByIdAndDelete(id);
+        return await this.eventService.create(createRequestDto);
       } else {
-        return await this.model.findByIdAndUpdate(id, createRequestDto).exec()
+        return await this.model.findByIdAndUpdate(id, createRequestDto).exec();
       }
     } else {
-      return {msg: "Bạn không có quyền duyệt!"}
+      return { msg: 'Bạn không có quyền duyệt!' };
     }
   }
 
-    async findByHost(host: string) {
+  async findByHost(host: string) {
     return await this.model.find({ host: host }).exec();
   }
 
   //minimal functions
   async Submitted(createEventDto: CreateRequestDto) {
-    const list = await (await this.eventService.findByHost(createEventDto.host)).length;
+    const list = await (
+      await this.eventService.findByHost(createEventDto.host)
+    ).length;
     return list;
   }
 }

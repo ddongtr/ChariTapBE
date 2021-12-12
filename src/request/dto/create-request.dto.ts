@@ -9,6 +9,7 @@ export class CreateRequestDto {
   max_registers: number;
   host: string;
   image?: string;
-    joiners?: [];
-    status?: string
+  joiners?: [];
+  status?: string;
+  statusCode?: number;
 }

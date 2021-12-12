@@ -32,7 +32,7 @@ export class EventsService {
   }
 
   async findAll(): Promise<Event[]> {
-    return await this.model.find().sort({start: -1}).exec();
+    return await this.model.find().sort({ start: -1 }).exec();
   }
 
   async findByHost(host: string): Promise<Event[]> {
@@ -40,7 +40,9 @@ export class EventsService {
   }
 
   async findByJoiner(joiner: string): Promise<Event[]> {
-    return await this.model.find({joiners: {$elemMatch: {_id:joiner}}}).exec();
+    return await this.model
+      .find({ joiners: { $elemMatch: { _id: joiner } } })
+      .exec();
   }
 
   async findOne(id: string): Promise<Event> {
@@ -69,11 +71,11 @@ export class EventsService {
   //functions for handling
   //-------------------------------------------
   //set status follow date
-  async handleStatus(createEventDto: CreateEventDto) {
-    const now = moment().format('DD/MM/YYYY'); //get date of moment
-    const START = createEventDto.start; //start date of event
-    const END = createEventDto.end; //end date of event
-    const REGIST_FROM = createEventDto.regist_from; //get start registing date of event
+  async handleStatus(createEventDto: any) {
+    const now = moment(moment(), 'DD/MM/YYYY'); //get date of moment
+    const START = moment(createEventDto.start, 'DD/MM/YYYY'); //start date of event
+    const END = moment(createEventDto.end, 'DD/MM/YYYY'); //end date of event
+    const REGIST_FROM = moment(createEventDto.regist_from, 'DD/MM/YYYY'); //get start registing date of event
 
     if (now < REGIST_FROM) {
       return 'preparing';

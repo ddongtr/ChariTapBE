@@ -12,6 +12,6 @@ import { UsersModule } from 'src/users/users.module';
     MongooseModule.forFeature([{ name: 'Event', schema: EventSchema }]),
     UsersModule,
   ],
-  exports: [EventsService]
+  exports: [EventsService],
 })
 export class EventsModule {}
